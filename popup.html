@@ -1,6 +1,36 @@
 <html>
   <body>
-    <h1>DeepL-zhtw</h1>
+    <p>
+      <div id="enabledText">DeepL-zhtw is Enabled</div>
+      <div id="disabledText">DeepL-zhtw is Disabled</div>
+    </p>
+
+    <p>
+      <button id="isEnabled">
+        <div id="disableButtonText">Disable DeepL-zhtw</div>
+        <div id="EnableButtonText">Enable DeepL-zhtw</div>
+      </button>
+    </p>
+
+    <p>
+      Default selection:
+      <select id="selection">
+        <option value="hans">Simplified</option>
+        <option value="hant">Traditional</option>
+        <option value="remember">Remember last selection</option>
+      </select>
+    </p>
+
+    <p>
+      Locals:
+      <select id="locals">
+        <option value="tw">Taiwan</option>
+        <option value="twp">Taiwan(With phrases)</option>
+        <option value="hk">Hong Kong</option>
+      </select>
+    </p>
+
     <a href="https://github.com/FoxRefire/DeepL-zhtw">Github</a>
   </body>
+  <script src="popup.js"></script>
 </html>

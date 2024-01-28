@@ -3,16 +3,28 @@ Lang = '#deepl-ui-tooltip-id-3 > span.Content--mycsA.text-white.dark\\:text-blac
 Output = 'd-textarea.last\\:grow > div:nth-child(1)';
 Switch = '.zh_switch > label:nth-child(1) > input:nth-child(1)'
 
-const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+chrome.storage.local.get("locals", (conf) => {
+    if(typeof conf.locals == 'undefined') chrome.storage.local.set({'locals': 'tw'}, ()=>{});
+    converter = OpenCC.Converter({ from: 'cn', to: conf.locals });
+});
 
 function addElement(){
     target=document.querySelector(Pointer);
-    if (typeof target != "null"){
     target.insertAdjacentHTML('afterend','<div class="zh_switch"><label><input type="checkbox"><br>簡/繁</label></div>');
-    }
+    chrome.storage.local.get(["selection", "lastSelection"], (conf) => {
+        if(conf.selection == 'hans') {
+            document.querySelector(Switch).checked = false;
+        } else if(conf.selection == 'hant') {
+            document.querySelector(Switch).checked = true;
+        } else if(conf.selection == 'remember' && typeof conf.lastSelection != 'undefined') {
+            document.querySelector(Switch).checked = conf.lastSelection;
+        }
+    });
 }
 
-function showHideSw(){
+function switchStatus(){
+    chrome.storage.local.set({'lastSelection': document.querySelector(Switch).checked}, ()=>{});
+
     if(document.querySelector(Lang).getAttribute('dl-selected-lang') == 'zh'){
         document.querySelector('.zh_switch').style.display = '';
     } else {
@@ -28,12 +40,17 @@ function convert(){
     }
 }
 
-const waitElement = setInterval(() => {
-    if(document.querySelector(Pointer)){
-        addElement()
-        setInterval(showHideSw,500);
-        setInterval(convert,500);
-        clearInterval(waitElement);
+
+chrome.storage.local.get("isEnabled", (conf) => {
+    if(conf.isEnabled) {
+        const waitElement = setInterval(() => {
+            if(document.querySelector(Pointer)){
+                addElement()
+                setInterval(switchStatus,500);
+                setInterval(convert,500);
+                clearInterval(waitElement);
+            }
+        }, 300);
     }
-}, 300);
+});
 

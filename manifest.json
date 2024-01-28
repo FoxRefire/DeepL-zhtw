@@ -12,5 +12,6 @@
           "matches": ["*://*.deepl.com/*"],
           "css": ["inject.css"]
         }
-    ]
+    ],
+    "permissions": ["storage"]
 }
