@@ -1,0 +1,16 @@
+{
+    "name": "DeepL-zhtw",
+    "description": "Chrome/Firefox extension for add Traditional Chinese on DeepL",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+          "js": ["cn2t.js", "content.js"],
+          "matches": ["*://*.deepl.com/*"],
+          "css": ["inject.css"]
+        }
+    ]
+}
