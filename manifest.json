@@ -3,6 +3,9 @@
     "description": "Chrome/Firefox extension for add Traditional Chinese on DeepL",
     "version": "1.0",
     "manifest_version": 3,
+    "icons": {
+        "128": "icon.png"
+    },
     "action": {
         "default_popup": "popup.html"
     },
