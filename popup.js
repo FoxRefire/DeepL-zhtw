@@ -38,26 +38,26 @@ function initConfigUi(){
 (async () => {
     await setDefaultValue();
     await initConfigUi();
-
-    document.getElementById('isEnabled').addEventListener('click', () => {
-        chrome.storage.local.get("isEnabled", (conf) => {
-            if(conf.isEnabled) {
-                setDisabled();
-            } else {
-                setEnabled();
-            }
-        });
-    });
-
-    document.getElementById('selection').addEventListener('change', () => {
-        chrome.storage.local.set({
-            'selection': document.getElementById('selection').value
-        }, null);
-    });
-
-    document.getElementById('locals').addEventListener('change', () => {
-        chrome.storage.local.set({
-            'locals': document.getElementById('locals').value
-        }, null);
-    });
 } )()
+
+document.getElementById('isEnabled').addEventListener('click', () => {
+    chrome.storage.local.get("isEnabled", (conf) => {
+        if(conf.isEnabled) {
+            setDisabled();
+        } else {
+            setEnabled();
+        }
+    });
+});
+
+document.getElementById('selection').addEventListener('change', () => {
+    chrome.storage.local.set({
+        'selection': document.getElementById('selection').value
+    }, null);
+});
+
+document.getElementById('locals').addEventListener('change', () => {
+    chrome.storage.local.set({
+        'locals': document.getElementById('locals').value
+    }, null);
+});

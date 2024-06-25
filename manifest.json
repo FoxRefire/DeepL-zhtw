@@ -11,7 +11,7 @@
     },
     "content_scripts": [
         {
-          "js": ["cn2t.js", "content.js"],
+          "js": ["opencc.js", "content.js"],
           "matches": ["*://*.deepl.com/*"],
           "css": ["toggleSwitch.css"]
         }
