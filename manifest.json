@@ -13,5 +13,6 @@
           "css": ["inject.css"]
         }
     ],
-    "permissions": ["storage"]
+    "permissions": ["storage"],
+    "host_permissions": ["*://*.deepl.com/*"]
 }
