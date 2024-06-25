@@ -1,5 +1,5 @@
 Pointer = 'div.space-x-1\\.5:nth-child(3) > div:nth-child(1)';
-Lang = '#deepl-ui-tooltip-id-3 > span.Content--mycsA.text-white.dark\\:text-black.overflow-hidden > span';
+Lang = 'section.flex > div:nth-child(2) d-textarea';
 Output = 'd-textarea.last\\:grow > div:nth-child(1)';
 Switch = '.zh_switch > label:nth-child(1) > input:nth-child(1)'
 
@@ -16,6 +16,17 @@ function setDefaultValue(){
             if(typeof conf.locals == 'undefined') chrome.storage.local.set({'locals': 'tw'}, null);
             resolve()
         });
+    });
+}
+
+function waitElement(){
+    return new Promise((resolve, reject) => {
+        const w = setInterval(() => {
+            if(document.querySelector(Pointer)){
+                resolve();
+                clearInterval(w);
+            }
+        }, 300);
     });
 }
 
@@ -36,12 +47,13 @@ function addElement(){
 function switchStatus(){
     chrome.storage.local.set({'lastSelection': document.querySelector(Switch).checked}, null);
 
-    if(document.querySelector(Lang).getAttribute('dl-selected-lang') == 'zh'){
+    if(document.querySelector(Lang) && document.querySelector(Lang).getAttribute('lang') == 'zh-CN'){
         document.querySelector('.zh_switch').style.display = '';
     } else {
         document.querySelector('.zh_switch').style.display = 'none';
     }
 }
+
 convertedResult = '';
 function convert(){
     domOutput = document.querySelector(Output)
@@ -53,16 +65,12 @@ function convert(){
 
 
 chrome.storage.local.get("isEnabled", async (conf) => {
-    await setDefaultValue()
+    await setDefaultValue();
     if(conf.isEnabled) {
-        const waitElement = setInterval(() => {
-            if(document.querySelector(Pointer)){
-                addElement()
-                setInterval(switchStatus,500);
-                setInterval(convert,500);
-                clearInterval(waitElement);
-            }
-        }, 300);
+        await waitElement();
+        addElement()
+        setInterval(switchStatus,500);
+        setInterval(convert,500);
     }
 });
 
