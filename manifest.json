@@ -13,7 +13,7 @@
         {
           "js": ["cn2t.js", "content.js"],
           "matches": ["*://*.deepl.com/*"],
-          "css": ["inject.css"]
+          "css": ["toggleSwitch.css"]
         }
     ],
     "permissions": ["storage"],
