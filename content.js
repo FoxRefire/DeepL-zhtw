@@ -4,7 +4,7 @@ Output = 'd-textarea.last\\:grow > div:nth-child(1)';
 Switch = '.zh_switch > label:nth-child(1) > input:nth-child(1)'
 
 chrome.storage.local.get("locals", (conf) => {
-    if(typeof conf.locals == 'undefined') chrome.storage.local.set({'locals': 'tw'}, ()=>{});
+    if(typeof conf.locals == 'undefined') chrome.storage.local.set({'locals': 'tw'}, null);
     converter = OpenCC.Converter({ from: 'cn', to: conf.locals });
 });
 
@@ -23,7 +23,7 @@ function addElement(){
 }
 
 function switchStatus(){
-    chrome.storage.local.set({'lastSelection': document.querySelector(Switch).checked}, ()=>{});
+    chrome.storage.local.set({'lastSelection': document.querySelector(Switch).checked}, null);
 
     if(document.querySelector(Lang).getAttribute('dl-selected-lang') == 'zh'){
         document.querySelector('.zh_switch').style.display = '';
@@ -31,12 +31,12 @@ function switchStatus(){
         document.querySelector('.zh_switch').style.display = 'none';
     }
 }
-currentOutput = '';
+convertedResult = '';
 function convert(){
     domOutput = document.querySelector(Output)
-    if(currentOutput != domOutput.innerHTML && document.querySelector(Switch).checked){
+    if(convertedResult != domOutput.innerHTML && document.querySelector(Switch).checked){
         domOutput.innerHTML = converter(domOutput.innerHTML)
-        currentOutput = domOutput.innerHTML;
+        convertedResult = domOutput.innerHTML;
     }
 }
 
