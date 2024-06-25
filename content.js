@@ -8,6 +8,17 @@ chrome.storage.local.get("locals", (conf) => {
     converter = OpenCC.Converter({ from: 'cn', to: conf.locals });
 });
 
+function setDefaultValue(){
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(["isEnabled", "selection", "locals"], (conf) => {
+            if(typeof conf.isEnabled == 'undefined') chrome.storage.local.set({'isEnabled': true}, null);
+            if(typeof conf.selection == 'undefined') chrome.storage.local.set({'selection': 'hant'}, null);
+            if(typeof conf.locals == 'undefined') chrome.storage.local.set({'locals': 'tw'}, null);
+            resolve()
+        });
+    });
+}
+
 function addElement(){
     target=document.querySelector(Pointer);
     target.insertAdjacentHTML('afterend','<div class="zh_switch"><label><input type="checkbox"><br>簡/繁</label></div>');
@@ -41,7 +52,8 @@ function convert(){
 }
 
 
-chrome.storage.local.get("isEnabled", (conf) => {
+chrome.storage.local.get("isEnabled", async (conf) => {
+    await setDefaultValue()
     if(conf.isEnabled) {
         const waitElement = setInterval(() => {
             if(document.querySelector(Pointer)){
