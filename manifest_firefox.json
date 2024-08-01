@@ -1,0 +1,26 @@
+{
+    "name": "DeepL-zhtw",
+    "description": "Chrome/Firefox extension for add Traditional Chinese on DeepL",
+    "version": "2.0",
+    "manifest_version": 3,
+    "icons": {
+        "128": "icon.png"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+          "js": ["opencc.js", "content.js"],
+          "matches": ["*://*.deepl.com/*"],
+          "css": ["toggleSwitch.css"]
+        }
+    ],
+    "permissions": ["storage"],
+    "host_permissions": ["*://*.deepl.com/*"],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "DeepL-zhtw@DeepL-zhtw"
+        }
+    }
+}
