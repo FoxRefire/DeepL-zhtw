@@ -15,3 +15,8 @@ Chrome/Firefox extension for add Traditional Chinese on DeepL
 ### Contribution
 Feel free to open issues/PR! 
 But consider using English if you can because I am Japanese and dont speak Chinese.
+
+### Third-party Licenses
+* [opencc-js](https://github.com/nk2028/opencc-js): [License(MIT License)](https://github.com/nk2028/opencc-js/blob/main/LICENSE)
+
+* [CSS Toggle Switch](https://qiita.com/_y_s/items/5b3a73f873dda2c2f47a): [License](https://qiita.com/terms)
