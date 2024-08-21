@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This extension has been discontinued since DeepL officially provides support for Traditional Chinese.
+> DeepL 由於官方已提供繁體中文支援，此延伸功能已被廢棄。
+
 <p align="center">
   <img width="180" src="https://github.com/FoxRefire/DeepL-zhtw/assets/155989196/73be4df0-1ba5-417b-9584-1bc9ec578253">
   <h1 align="center">DeepL-zhtw</h1>
